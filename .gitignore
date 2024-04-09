@@ -14,4 +14,4 @@ target/
 .project
 
 # MBG generated file
-mall-mbg/src/main/java
+mall-mbg/src/main/**/*.java
