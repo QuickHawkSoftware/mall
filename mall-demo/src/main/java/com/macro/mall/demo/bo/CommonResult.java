@@ -33,7 +33,7 @@ public class CommonResult {
      * 返回分页成功数据
      */
     public CommonResult pageSuccess(List data) {
-        PageInfo pageInfo = new PageInfo(data);
+        PageInfo<List> pageInfo = new PageInfo<>(data);
         long totalPage = pageInfo.getTotal() / pageInfo.getPageSize();
         Map<String, Object> result = new HashMap<>();
         result.put("pageSize", pageInfo.getPageSize());
