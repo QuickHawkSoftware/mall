@@ -18,42 +18,42 @@ import java.util.List;
  */
 @Service
 public class DemoServiceImpl implements DemoService {
-    @Autowired
-    private PmsBrandMapper brandMapper;
+  @Autowired
+  private PmsBrandMapper brandMapper;
 
-    @Override
-    public List<PmsBrand> listAllBrand() {
-        return brandMapper.select(SelectDSLCompleter.allRows());
-    }
+  @Override
+  public List<PmsBrand> listAllBrand() {
+    return brandMapper.select(SelectDSLCompleter.allRows());
+  }
 
-    @Override
-    public int createBrand(PmsBrandDto pmsBrandDto) {
-        PmsBrand pmsBrand = new PmsBrand();
-        BeanUtils.copyProperties(pmsBrandDto,pmsBrand);
-        return brandMapper.insertSelective(pmsBrand);
-    }
+  @Override
+  public int createBrand(PmsBrandDto pmsBrandDto) {
+    PmsBrand pmsBrand = new PmsBrand();
+    BeanUtils.copyProperties(pmsBrandDto, pmsBrand);
+    return brandMapper.insertSelective(pmsBrand);
+  }
 
-    @Override
-    public int updateBrand(Long id, PmsBrandDto pmsBrandDto) {
-        PmsBrand pmsBrand = new PmsBrand();
-        BeanUtils.copyProperties(pmsBrandDto,pmsBrand);
-        pmsBrand.setId(id);
-        return brandMapper.updateByPrimaryKeySelective(pmsBrand);
-    }
+  @Override
+  public int updateBrand(Long id, PmsBrandDto pmsBrandDto) {
+    PmsBrand pmsBrand = new PmsBrand();
+    BeanUtils.copyProperties(pmsBrandDto, pmsBrand);
+    pmsBrand.setId(id);
+    return brandMapper.updateByPrimaryKeySelective(pmsBrand);
+  }
 
-    @Override
-    public int deleteBrand(Long id) {
-        return brandMapper.deleteByPrimaryKey(id);
-    }
+  @Override
+  public int deleteBrand(Long id) {
+    return brandMapper.deleteByPrimaryKey(id);
+  }
 
-    @Override
-    public List<PmsBrand> listBrand(int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
-        return brandMapper.select(SelectDSLCompleter.allRows());
-    }
+  @Override
+  public List<PmsBrand> listBrand(int pageNum, int pageSize) {
+    PageHelper.startPage(pageNum, pageSize);
+    return brandMapper.select(SelectDSLCompleter.allRows());
+  }
 
-    @Override
-    public PmsBrand getBrand(Long id) {
-        return brandMapper.selectByPrimaryKey(id).orElse(null);
-    }
+  @Override
+  public PmsBrand getBrand(Long id) {
+    return brandMapper.selectByPrimaryKey(id).orElse(null);
+  }
 }
