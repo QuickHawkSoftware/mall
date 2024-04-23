@@ -4,22 +4,33 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.2.4</version>
-    <relativePath/> <!-- lookup parent from repository -->
+    <groupId>com.macro</groupId>
+    <artifactId>mall</artifactId>
+    <version>1.0-SNAPSHOT</version>
   </parent>
-  <groupId>com.macro</groupId>
   <artifactId>mall-demo</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <name>mall-demo</name>
 
   <dependencies>
+
+    <!-- MALL MODULES START -->
     <dependency>
       <groupId>com.macro</groupId>
       <artifactId>mall-mbg</artifactId>
-      <version>1.0-SNAPSHOT</version>
     </dependency>
+    <dependency>
+      <groupId>com.macro</groupId>
+      <artifactId>mall-common</artifactId>
+    </dependency>
+    <!-- MALL MODULES END -->
+
+    <!-- COMMON DEPS START-->
+    <dependency>
+      <groupId>com.mysql</groupId>
+      <artifactId>mysql-connector-j</artifactId>
+    </dependency>
+    <!-- COMMON DEPS END-->
+
+    <!-- SPRING DEPS START -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
@@ -27,11 +38,6 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-thymeleaf</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.mybatis.spring.boot</groupId>
-      <artifactId>mybatis-spring-boot-starter</artifactId>
-      <version>3.0.3</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -43,21 +49,11 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>5.10.2</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-      <version>2.5.0</version>
     </dependency>
-    <dependency>
-      <groupId>com.github.pagehelper</groupId>
-      <artifactId>pagehelper-spring-boot-starter</artifactId>
-      <version>2.1.0</version>
-    </dependency>
+    <!-- SPRING DEPS END -->
+
   </dependencies>
 
   <build>

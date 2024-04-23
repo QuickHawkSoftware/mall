@@ -1,6 +1,6 @@
 package com.macro.mall.demo.controller;
 
-import com.macro.mall.demo.bo.CommonResult;
+import com.macro.bo.CommonResult;
 import com.macro.mall.demo.dto.PmsBrandDto;
 import com.macro.mall.demo.service.DemoService;
 import io.swagger.v3.oas.annotations.Operation;
