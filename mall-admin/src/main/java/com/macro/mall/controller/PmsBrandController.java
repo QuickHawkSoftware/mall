@@ -1,7 +1,7 @@
 package com.macro.mall.controller;
 
 import com.macro.mall.bo.CommonResult;
-import com.macro.mall.dto.PmsBrandDto;
+import com.macro.mall.dto.PmsBrandParam;
 import com.macro.mall.service.PmsBrandService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 品牌功能 Controller
  */
-@Tag(name = "PmsBrand", description = "PmsBrandController")
 @Controller
+@RequestMapping("/brand")
+@Tag(name = "PmsBrand", description = "PmsBrandController")
 public class PmsBrandController {
   @Autowired
   private PmsBrandService pmsBrandService;
@@ -25,16 +26,16 @@ public class PmsBrandController {
   private static final Logger LOGGER = LoggerFactory.getLogger(PmsBrandController.class);
 
   @Operation(summary = "获取全部品牌列表")
-  @RequestMapping(value = "/brand/listAll", method = RequestMethod.GET)
+  @RequestMapping(value = "/listAll", method = RequestMethod.GET)
   @ResponseBody
   public Object getBrandList() {
     return new CommonResult().success(pmsBrandService.listAllBrand());
   }
 
   @Operation(summary = "添加品牌")
-  @RequestMapping(value = "/brand/create", method = RequestMethod.POST)
+  @RequestMapping(value = "/create", method = RequestMethod.POST)
   @ResponseBody
-  public Object createBrand(@Validated @RequestBody PmsBrandDto pmsBrand, BindingResult result) {
+  public Object createBrand(@Validated @RequestBody PmsBrandParam pmsBrand, BindingResult result) {
     if (result.hasErrors()) {
       return new CommonResult().validateFailed(result.getFieldError().getDefaultMessage());
     }
@@ -51,26 +52,26 @@ public class PmsBrandController {
   }
 
   @Operation(summary = "更新品牌")
-  @RequestMapping(value = "/brand/update/{id}", method = RequestMethod.POST)
+  @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
   @ResponseBody
-  public Object updateBrand(@PathVariable("id") Long id, @Validated @RequestBody PmsBrandDto pmsBrandDto, BindingResult result) {
+  public Object updateBrand(@PathVariable("id") Long id, @Validated @RequestBody PmsBrandParam pmsBrandParam, BindingResult result) {
     if (result.hasErrors()) {
       return new CommonResult().validateFailed(result.getFieldError().getDefaultMessage());
     }
     CommonResult commonResult;
-    int count = pmsBrandService.updateBrand(id, pmsBrandDto);
+    int count = pmsBrandService.updateBrand(id, pmsBrandParam);
     if (count == 1) {
-      commonResult = new CommonResult().success(pmsBrandDto);
-      LOGGER.debug("updateBrand success:{}", pmsBrandDto);
+      commonResult = new CommonResult().success(pmsBrandParam);
+      LOGGER.debug("updateBrand success:{}", pmsBrandParam);
     } else {
       commonResult = new CommonResult().failed();
-      LOGGER.debug("updateBrand failed:{}", pmsBrandDto);
+      LOGGER.debug("updateBrand failed:{}", pmsBrandParam);
     }
     return commonResult;
   }
 
   @Operation(summary = "删除品牌")
-  @RequestMapping(value = "/brand/delete/{id}", method = RequestMethod.GET)
+  @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
   @ResponseBody
   public Object deleteBrand(@PathVariable("id") Long id) {
     int count = pmsBrandService.deleteBrand(id);
@@ -84,7 +85,7 @@ public class PmsBrandController {
   }
 
   @Operation(summary = "分页获取品牌列表")
-  @RequestMapping(value = "/brand/list", method = RequestMethod.GET)
+  @RequestMapping(value = "/list", method = RequestMethod.GET)
   @ResponseBody
   public Object listBrand(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                           @RequestParam(value = "pageSize", defaultValue = "3") Integer pageSize) {
@@ -92,7 +93,7 @@ public class PmsBrandController {
   }
 
   @Operation(summary = "根据编号查询品牌信息")
-  @RequestMapping(value = "/brand/{id}", method = RequestMethod.GET)
+  @RequestMapping(value = "/{id}", method = RequestMethod.GET)
   @ResponseBody
   public Object getBrand(@PathVariable("id") Long id) {
     return new CommonResult().success(pmsBrandService.getBrand(id));

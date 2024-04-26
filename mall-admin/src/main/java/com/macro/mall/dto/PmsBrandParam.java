@@ -9,9 +9,9 @@ import lombok.Data;
 /**
  * 品牌传递参数
  */
-@Schema(description = "PmsBrandDto")
+@Schema(description = "PmsBrandParam")
 @Data
-public class PmsBrandDto {
+public class PmsBrandParam {
   @Schema(description = "品牌名称")
   @NotNull(message = "名称不能为空")
   private String name;
