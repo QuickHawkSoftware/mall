@@ -1,14 +1,14 @@
-package com.macro.mall.demo.service;
+package com.macro.mall.service;
 
-import com.macro.mall.demo.dto.PmsBrandDto;
+import com.macro.mall.dto.PmsBrandDto;
 import com.macro.mall.model.PmsBrand;
 
 import java.util.List;
 
 /**
- * DemoService接口
+ * 商品品牌接口
  */
-public interface DemoService {
+public interface PmsBrandService {
   List<PmsBrand> listAllBrand();
 
   int createBrand(PmsBrandDto pmsBrandDto);

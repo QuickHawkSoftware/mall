@@ -33,7 +33,6 @@
 
   <modules>
     <module>mall-admin</module>
-    <module>mall-demo</module>
     <module>mall-mbg</module>
     <module>mall-common</module>
   </modules>

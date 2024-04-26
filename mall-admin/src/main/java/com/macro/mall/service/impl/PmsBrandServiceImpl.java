@@ -1,8 +1,8 @@
-package com.macro.mall.demo.service.impl;
+package com.macro.mall.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.macro.mall.demo.dto.PmsBrandDto;
-import com.macro.mall.demo.service.DemoService;
+import com.macro.mall.dto.PmsBrandDto;
+import com.macro.mall.service.PmsBrandService;
 import com.macro.mall.mapper.PmsBrandMapper;
 import com.macro.mall.model.PmsBrand;
 
@@ -13,11 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * DemoService实现类
- */
 @Service
-public class DemoServiceImpl implements DemoService {
+public class PmsBrandServiceImpl implements PmsBrandService {
   @Autowired
   private PmsBrandMapper brandMapper;
 

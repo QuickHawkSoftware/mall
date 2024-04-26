@@ -1,5 +1,6 @@
-package com.macro.mall.demo.dto;
+package com.macro.mall.dto;
 
+import com.macro.mall.validator.FlagValidator;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -24,9 +25,11 @@ public class PmsBrandDto {
   private Integer sort;
 
   @Schema(description = "是否为厂家制造商")
+  @FlagValidator(value = {"0", "1"}, message = "厂家状态不正确")
   private Integer factoryStatus;
 
   @Schema(description = "是否进行显示")
+  @FlagValidator(value = {"0", "1"}, message = "显示状态不正确")
   private Integer showStatus;
 
   @Schema(description = "品牌logo")
@@ -34,7 +37,7 @@ public class PmsBrandDto {
 
   @Schema(description = "品牌大图")
   private String bigPic;
-  
+
   @Schema(description = "品牌故事")
   private String brandStory;
 

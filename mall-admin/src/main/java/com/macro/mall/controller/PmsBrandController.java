@@ -1,49 +1,34 @@
-package com.macro.mall.demo.controller;
+package com.macro.mall.controller;
 
-import com.macro.bo.CommonResult;
-import com.macro.mall.demo.dto.PmsBrandDto;
-import com.macro.mall.demo.service.DemoService;
+import com.macro.mall.bo.CommonResult;
+import com.macro.mall.dto.PmsBrandDto;
+import com.macro.mall.service.PmsBrandService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * 测试controller
+ * 品牌功能 Controller
  */
-@Tag(name = "demo", description = "demo详情")
+@Tag(name = "PmsBrand", description = "PmsBrandController")
 @Controller
-public class DemoController {
+public class PmsBrandController {
   @Autowired
-  private DemoService demoService;
+  private PmsBrandService pmsBrandService;
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(DemoController.class);
-
-  @Operation(summary = "此处为首页")
-  @RequestMapping(value = "/", method = RequestMethod.GET)
-  @ResponseBody
-  public String hello() {
-    return "This is home!";
-  }
-
-  @Operation(summary = "获取品牌列表界面（网页显示）")
-  @RequestMapping(value = "/list", method = RequestMethod.GET)
-  public String getBrandListPage(Model model) {
-    model.addAttribute("brandList", demoService.listAllBrand());
-    return "demo";
-  }
+  private static final Logger LOGGER = LoggerFactory.getLogger(PmsBrandController.class);
 
   @Operation(summary = "获取全部品牌列表")
   @RequestMapping(value = "/brand/listAll", method = RequestMethod.GET)
   @ResponseBody
   public Object getBrandList() {
-    return new CommonResult().success(demoService.listAllBrand());
+    return new CommonResult().success(pmsBrandService.listAllBrand());
   }
 
   @Operation(summary = "添加品牌")
@@ -54,7 +39,7 @@ public class DemoController {
       return new CommonResult().validateFailed(result.getFieldError().getDefaultMessage());
     }
     CommonResult commonResult;
-    int count = demoService.createBrand(pmsBrand);
+    int count = pmsBrandService.createBrand(pmsBrand);
     if (count == 1) {
       commonResult = new CommonResult().success(pmsBrand);
       LOGGER.debug("createBrand success:{}", pmsBrand);
@@ -73,7 +58,7 @@ public class DemoController {
       return new CommonResult().validateFailed(result.getFieldError().getDefaultMessage());
     }
     CommonResult commonResult;
-    int count = demoService.updateBrand(id, pmsBrandDto);
+    int count = pmsBrandService.updateBrand(id, pmsBrandDto);
     if (count == 1) {
       commonResult = new CommonResult().success(pmsBrandDto);
       LOGGER.debug("updateBrand success:{}", pmsBrandDto);
@@ -88,7 +73,7 @@ public class DemoController {
   @RequestMapping(value = "/brand/delete/{id}", method = RequestMethod.GET)
   @ResponseBody
   public Object deleteBrand(@PathVariable("id") Long id) {
-    int count = demoService.deleteBrand(id);
+    int count = pmsBrandService.deleteBrand(id);
     if (count == 1) {
       LOGGER.debug("deleteBrand success :id={}", id);
       return new CommonResult().success(null);
@@ -103,13 +88,13 @@ public class DemoController {
   @ResponseBody
   public Object listBrand(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                           @RequestParam(value = "pageSize", defaultValue = "3") Integer pageSize) {
-    return new CommonResult().pageSuccess(demoService.listBrand(pageNum, pageSize));
+    return new CommonResult().pageSuccess(pmsBrandService.listBrand(pageNum, pageSize));
   }
 
   @Operation(summary = "根据编号查询品牌信息")
   @RequestMapping(value = "/brand/{id}", method = RequestMethod.GET)
   @ResponseBody
-  public Object brand(@PathVariable("id") Long id) {
-    return new CommonResult().success(demoService.getBrand(id));
+  public Object getBrand(@PathVariable("id") Long id) {
+    return new CommonResult().success(pmsBrandService.getBrand(id));
   }
 }

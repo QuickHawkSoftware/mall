@@ -1,4 +1,4 @@
-package com.macro.bo;
+package com.macro.mall.bo;
 
 import com.github.pagehelper.PageInfo;
 import lombok.Data;
